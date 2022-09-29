@@ -1,0 +1,590 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier-Oblique;
+\f3\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red173\green173\blue173;\red255\green255\blue255;\red74\green80\blue93;
+\red202\green65\blue215;\red82\green159\blue236;\red121\green194\blue101;\red40\green174\blue184;\red173\green173\blue173;
+\red222\green180\blue103;\red121\green194\blue100;\red197\green136\blue84;\red232\green64\blue91;\red174\green174\blue173;
+\red82\green160\blue236;}
+{\*\expandedcolortbl;;\cssrgb\c73446\c73445\c73354;\cssrgb\c100000\c100000\c100000;\cssrgb\c36228\c38944\c44065;
+\cssrgb\c83843\c37604\c87251;\cssrgb\c38346\c69080\c94054;\cssrgb\c53862\c79176\c46941;\cssrgb\c16963\c73082\c77323;\cssrgb\c73526\c73526\c73342;
+\cssrgb\c89800\c75244\c47950;\cssrgb\c53819\c79128\c46793;\cssrgb\c81807\c60237\c40019;\cssrgb\c93645\c34864\c43259;\cssrgb\c73606\c73606\c73330;
+\cssrgb\c38579\c69358\c94284;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25260\viewh12460\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\qc\partightenfactor0
+
+\f0\b\fs160 \cf0 K
+\fs80 afka Django Integration\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b0\fs32 \cf0 KafkaSettings:-\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf2 \cb3 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\i \cf4 # SETTING PROJECT KAFKA\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf5 try
+\f3\i0 \cf2 :\
+    
+\f2\i \cf4 # Enable producer to send events\
+    
+\f3\i0 \cf2 KAFKA_PRODUCE_EVENTS = os.\cf6 getenv\cf2 (\cf7 "KAFKA_PRODUCE_EVENTS"\cf2 , \cf7 "False"\cf2 ).\cf6 lower\cf2 () 
+\f2\i \cf5 in 
+\f3\i0 \cf2 (\
+        \cf7 "true"\cf2 ,\
+        \cf7 "1"\cf2 ,\
+        \cf7 "t"\cf2 ,\
+    )\
+    KAFKA_CONSUME_EVENTS = os.\cf6 getenv\cf2 (\cf7 "KAFKA_CONSUME_EVENTS"\cf2 , \cf7 "False"\cf2 ).\cf6 lower\cf2 () 
+\f2\i \cf5 in 
+\f3\i0 \cf2 (\
+        \cf7 "true"\cf2 ,\
+        \cf7 "1"\cf2 ,\
+        \cf7 "t"\cf2 ,\
+    )\
+    KAFKA_EVENTS_BROKER = os.environ.\cf6 get\cf2 (\cf7 "KAFKA_EVENTS_BROKER"\cf2 )\
+    KAFKA_EVENTS_TOPIC = os.environ.\cf6 get\cf2 (\cf7 "KAFKA_EVENTS_TOPIC"\cf2 )\
+    KAFKA_EVENTS_TOPIC_CONSUMER_GROUP = os.environ.\cf6 get\cf2 (\
+        \cf7 "KAFKA_EVENTS_TOPIC_CONSUMER_GROUP"\
+    \cf2 )\
+    KAFKA_PRODUCER_SEND_RETRIES = \cf8 int\cf2 (os.environ.\cf6 get\cf2 (\cf7 "KAFKA_PRODUCER_SEND_RETRIES"\cf2 ))\
+    KAFKA_AUTOCOMMIT_OFFSET = os.\cf6 getenv\cf2 (\cf7 "KAFKA_AUTOCOMMIT_OFFSET"\cf2 , \cf7 "False"\cf2 ).\cf6 lower\cf2 () 
+\f2\i \cf5 in 
+\f3\i0 \cf2 (\
+        \cf7 "true"\cf2 ,\
+        \cf7 "1"\cf2 ,\
+        \cf7 "t"\cf2 ,\
+    )\
+
+\f2\i \cf5 except 
+\f3\i0 \cf8 Exception 
+\f2\i \cf5 as 
+\f3\i0 \cf2 ex:\
+    logger.\cf6 error\cf2 (\cf7 "ERROR: KAFKA CONFIGURATION ERROR!!! CHECK YOUR .env file"\cf2 )\
+    logger.\cf6 warning\cf2 (ex)\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs32 \cf0 \cb1 \
+KafkaEnv:-\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3\fs22 \cf2 \cb3 KAFKA_PRODUCE_EVENTS=True\
+KAFKA_CONSUME_EVENTS=True\
+KAFKA_EVENTS_BROKER='kafka:9092'\
+KAFKA_EVENTS_TOPIC='event_store'\
+KAFKA_EVENTS_TOPIC_CONSUMER_GROUP='fms-driver-management-system'\
+KAFKA_PRODUCER_SEND_RETRIES=0\
+KAFKA_AUTOCOMMIT_OFFSET=False\
+SERVICE_NAME='fms-driver-management-system'\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\fs32 \cf0 \cb1 \
+KafkaProducer :-\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\i \cf5 \cb3 import 
+\f3\i0 \cf2 logging\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\i \cf5 from 
+\f3\i0 \cf2 json 
+\f2\i \cf5 import 
+\f3\i0 \cf2 dumps\
+
+\f2\i \cf5 from 
+\f3\i0 \cf2 kafka 
+\f2\i \cf5 import 
+\f3\i0 \cf2 KafkaProducer     
+\fs32                 \
+
+\fs24 \cf9 		\
+\cf2 logger = logging.\cf6 getLogger\cf2 (__name__)\
+\
+
+\f2\i \cf4 # Supported Operation Types\
+\cf5 class 
+\f3\i0 \cf10 OperationTypes\cf2 :\
+    CREATE = \cf7 "create"\
+    \cf2 UPDATE = \cf7 "update"\
+    \cf2 DELETE = \cf7 "delete"\
+\
+\cf11 \
+
+\f2\i \cf5 def 
+\f3\i0 \cf6 generate_model_event\cf2 (\cf12 instance\cf2 =
+\f2\i \cf5 None
+\f3\i0 \cf2 , \cf12 serializer\cf2 =
+\f2\i \cf5 None
+\f3\i0 \cf2 , \cf12 operation\cf2 =
+\f2\i \cf5 None
+\f3\i0 \cf2 ):\
+\
+    
+\f2\i \cf4 """Creates and publishes/produces a model event to the kafka events\
+       topic (configured in settings.py) with given operation type.\
+\
+\
+	# Do not generate events if kafka disabled in settings\
+\cf5 	if not 
+\f3\i0 \cf2 KAFKA_PRODUCE_EVENTS:\
+    		
+\f2\i \cf5 return\
+\
+	if not 
+\f3\i0 \cf12 operation\cf2 :\
+    		
+\f2\i \cf5 raise 
+\f3\i0 \cf8 ValueError\cf2 (\cf7 "publish event 'operation' not provided"\cf2 )\
+\
+
+\f2\i \cf5 	if 
+\f3\i0 \cf12 operation 
+\f2\i \cf5 not in 
+\f3\i0 \cf2 [\cf7 "create"\cf2 , \cf7 "update"\cf2 , \cf7 "delete"\cf2 ]:\
+    		
+\f2\i \cf5 raise 
+\f3\i0 \cf8 ValueError\cf2 (\cf7 "operation type '" \cf2 + \cf12 operation \cf2 + \cf7 "' not supported"\cf2 )\
+\cf9 \
+	
+\f2\i \cf5 if not 
+\f3\i0 \cf12 instance\cf2 :\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2     		
+\f2\i \cf5 raise 
+\f3\i0 \cf8 ValueError\cf2 (\cf7 "publish event 'instance' is required"\cf2 )\
+\
+\
+	
+\f2\i \cf5 if 
+\f3\i0 \cf12 serializer\cf2 :\
+    		event = \{\
+        		\cf7 "source"\cf2 : SERVICE_NAME,\
+       		\cf7 "event_type"\cf2 : \cf7 "model"\cf2 ,\
+        		\cf7 "operation"\cf2 : \cf12 operation\cf2 ,\
+        		
+\f2\i \cf4 # event name format is fixed. "[operation]_[instance model name]"\
+        		# e.g. create_Role\
+        		
+\f3\i0 \cf7 "event_name"\cf2 : \cf12 operation \cf2 + \cf7 "_" \cf2 + \cf8 type\cf2 (\cf12 instance\cf2 ).\cf13 __name__\cf2 ,\
+        		\cf7 "instance"\cf2 : \cf12 serializer\cf2 (\cf12 instance\cf2 ).data,\
+    			\}\
+
+\f2\i \cf5 	else
+\f3\i0 \cf2 :\
+    		event = \{\
+        		\cf7 \'93source"\cf2 : SERVICE_NAME,\
+        		\cf7 "event_type"\cf2 : \cf7 "model"\cf2 ,\
+        		\cf7 "operation"\cf2 : \cf12 operation\cf2 ,\
+        		#
+\f2\i \cf4 event name format is fixed. "[operation]_[instance model name]"\
+         	#e.g. create_Role\
+        		
+\f3\i0 \cf7 "event_name"\cf2 : \cf12 operation \cf2 + \cf7 "_" \cf2 + \cf8 type\cf2 (\cf12 instance\cf2 ).\cf13 __name__\cf2 ,\
+        		\cf7 "instance"\cf2 : \cf12 instance\cf2 ,\
+    			\}\
+\
+	producer = \cf6 KafkaProducer\cf2 (\
+    		\cf12 bootstrap_servers\cf2 =[KAFKA_EVENTS_BROKER],\
+    		\cf12 value_serializer\cf2 =
+\f2\i \cf5 lambda 
+\f3\i0 \cf12 x\cf2 : \cf6 dumps\cf2 (x).\cf6 encode\cf2 (\cf7 "utf-8"\cf2 ),\
+    		\cf12 retries\cf9 =KAFKA_PRODUCER_SEND_RETRIES,\
+		)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf14 \
+	
+\f2\i \cf5 def 
+\f3\i0 \cf6 on_send_error\cf2 ():\
+    		
+\f2\i \cf4 """Callback for error on sending event to topic"""\
+    		
+\f3\i0 \cf2 logger.\cf6 error\cf2 (\cf7 "Event sending failed." \cf2 + \cf8 str\cf2 (event))\
+\
+		producer.\cf6 send\cf2 (KAFKA_EVENTS_TOPIC, \cf12 value\cf2 =event).\cf6 add_errback\cf2 (on_send_error)\
+\
+\cf9 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\i \cf5 def 
+\f3\i0 \cf6 generate_custom_model_event\cf2 (\cf12 event_name\cf2 , \cf12 event_data\cf2 =
+\f2\i \cf5 None
+\f3\i0 \cf2 , \cf12 operation\cf2 =
+\f2\i \cf5 None
+\f3\i0 \cf2 ):\
+    
+\f2\i \cf4 """Creates and publishes/produces a model event to the kafka events\
+       topic (configured in settings.py) with given operation type.\
+    """\
+\
+    # Do not generate events if kafka disabled in settings\
+    \cf5 if not 
+\f3\i0 \cf2 KAFKA_PRODUCE_EVENTS:\
+        
+\f2\i \cf5 return\
+\
+    if 
+\f3\i0 \cf12 operation 
+\f2\i \cf5 not in 
+\f3\i0 \cf2 [\cf7 "create"\cf2 , \cf7 "update"\cf2 , \cf7 "delete"\cf2 ]:\
+        
+\f2\i \cf5 raise 
+\f3\i0 \cf8 ValueError\cf2 (\cf7 "operation type '" \cf2 + \cf12 operation \cf2 + \cf7 "' not supported"\cf2 )\
+\
+    event = \{\
+        \cf7 "source"\cf2 : SERVICE_NAME,\
+        \cf7 "event_type"\cf2 : \cf7 "custom_model"\cf2 ,\
+        \cf7 "operation"\cf2 : \cf12 operation\cf2 ,\
+        \cf7 "event_name"\cf2 : \cf12 event_name\cf2 ,\
+        \cf7 "event"\cf2 : \cf12 event_data\cf2 ,\
+    \}\
+\
+    producer = \cf6 KafkaProducer\cf2 (\
+        \cf12 bootstrap_servers\cf2 =[KAFKA_EVENTS_BROKER],\
+        \cf12 value_serializer\cf2 =
+\f2\i \cf5 lambda 
+\f3\i0 \cf12 x\cf2 : \cf6 dumps\cf2 (x).\cf6 encode\cf2 (\cf7 "utf-8"\cf2 ),\
+        \cf12 retries\cf2 =KAFKA_PRODUCER_SEND_RETRIES,\
+    )\
+\
+    
+\f2\i \cf5 def 
+\f3\i0 \cf6 on_send_error\cf2 ():\
+        
+\f2\i \cf4 """Callback for error on sending event to topic"""\
+        
+\f3\i0 \cf2 logger.\cf6 error\cf2 (\cf7 "Event sending failed." \cf2 + \cf8 str\cf2 (event))\
+\
+    \cf8 print\cf2 (producer.\cf6 send\cf2 (KAFKA_EVENTS_TOPIC, \cf12 value\cf2 =event).\cf6 add_errback\cf2 (on_send_error))\
+    \cf8 print\cf2 (\cf7 "Event data : "\cf2 , event)\
+\
+\
+\
+\
+\cf6 /////// To send event from controller ////\
+\cf2 	after hitting serializer =>\
+	\cf6 generate_custom_model_event\cf2 (\
+    \cf7 "create_location"\cf2 , serializer.data, OperationTypes.CREATE\
+	)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf14 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 \cb1 \
+KafkaConsumer :-\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\i \cf5 \cb3 from 
+\f3\i0 \cf2 common.models 
+\f2\i \cf5 import 
+\f3\i0 \cf2 (\
+    CustomerProxy,\
+    UserProxy,\
+    VehicleProxy,\
+    PackageProxy,\
+    CustomerPackageAllocationProxy,\
+    CustomerFeaturesAssociation,\
+    SystemFeaturesChoices,\
+    FuelProxy,\
+)\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\i \cf5 class 
+\f3\i0 \cf10 CustomerProxyEventHandler\cf2 :\
+    
+\f2\i \cf5 def 
+\f3\i0 \cf6 create_customer_proxy\cf2 (
+\f2\i \cf5 self
+\f3\i0 \cf2 , \cf12 event_data\cf2 ):\
+        instance_create = \cf12 event_data\cf2 .\cf6 get\cf2 (\cf7 "instance"\cf2 , 
+\f2\i \cf5 None
+\f3\i0 \cf2 )\
+        
+\f2\i \cf5 if 
+\f3\i0 \cf2 instance_create:\
+            CustomerProxy.objects.\cf6 create\cf2 (\
+                \cf12 customer_id\cf2 =instance_create.\cf6 get\cf2 (\cf7 "customer_id"\cf2 ),\
+                \cf12 name\cf2 =instance_create.\cf6 get\cf2 (\cf7 "name"\cf2 ),\
+                \cf12 email\cf2 =instance_create.\cf6 get\cf2 (\cf7 "email"\cf2 ),\
+                \cf12 is_active\cf2 =
+\f2\i \cf5 True
+\f3\i0 \cf2 ,\
+                \cf12 status\cf2 =StatusChoices.ACTIVE,\
+            )\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \
+	
+\f2\i \cf5 def 
+\f3\i0 \cf6 update_customer_proxy\cf2 (
+\f2\i \cf5 self
+\f3\i0 \cf2 , \cf12 event_data\cf2 ):\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2     		instance_update = \cf12 event_data\cf2 .\cf6 get\cf2 (\cf7 "instance"\cf2 , 
+\f2\i \cf5 None
+\f3\i0 \cf2 )\
+    		
+\f2\i \cf5 if 
+\f3\i0 \cf2 instance_update:\
+        		status = instance_update.\cf6 get\cf2 (\cf7 "status_id"\cf2 )\
+        		
+\f2\i \cf5 if 
+\f3\i0 \cf8 str\cf2 (status) == \cf7 "1"\cf2 :\
+            		status = StatusChoices.ACTIVE\
+        		
+\f2\i \cf5 elif 
+\f3\i0 \cf8 str\cf2 (status) == \cf7 "2"\cf2 :\
+            		status = StatusChoices.INACTIVE\
+\
+        		CustomerProxy.objects.\cf6 update_or_create\cf2 (\
+            	\cf12 customer_id\cf2 =instance_update.\cf6 get\cf2 (\cf7 "customer_id"\cf2 ),\
+            	\cf12 defaults\cf2 =\{\
+                \cf7 "name"\cf2 : instance_update.\cf6 get\cf2 (\cf7 "name"\cf2 ),\
+                \cf7 "email"\cf2 : instance_update.\cf6 get\cf2 (\cf7 "email"\cf2 ),\
+                \cf7 "status"\cf2 : status,\
+            		\},\
+        		)
+\fs22 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs24 \cf2 \
+\cf6 //// Now to consume events ///\
+/// create a common app in your Django project and inside  your app.py => def ready(self): ///\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf15 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\i \cf4 	"""\
+	Following section is for starting the event consumer thread.\
+	The thread reads the events from a kafka topic where all\
+	microservices are publishing and listening for events. When a\
+	microservice reads an event it is concerned with, it \
+		executes the conditional logic inside the consume_events \
+		method. \
+ \
+		This check prevents the event consumer thread from being started, \
+		if the management command executed is any other than 'runserver'\
+		command. If this check is removed, the consumer thread will get \
+		started on other management commands like 'makemigrations' 'migrate'\
+		and the command will not automatically terminate like it should \
+		which we don't want. We want the thread to start only on 'runserver'\
+		""" \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf5 if not 
+\f3\i0 \cf2 ( \
+    \cf7 "runserver" 
+\f2\i \cf5 in 
+\f3\i0 \cf2 sys.argv \
+    
+\f2\i \cf5 or 
+\f3\i0 \cf7 "be_fms_driver_management.wsgi:application" 
+\f2\i \cf5 in 
+\f3\i0 \cf2 sys.argv \
+): \
+    
+\f2\i \cf5 return  \
+ \
+import 
+\f3\i0 \cf2 json \
+
+\f2\i \cf5 import 
+\f3\i0 \cf2 logging \
+
+\f2\i \cf5 from 
+\f3\i0 \cf2 threading 
+\f2\i \cf5 import 
+\f3\i0 \cf2 Thread \
+
+\f2\i \cf5 from 
+\f3\i0 \cf2 kafka 
+\f2\i \cf5 import 
+\f3\i0 \cf2 KafkaConsumer, OffsetAndMetadata, TopicPartition \
+
+\f2\i \cf5 from 
+\f3\i0 \cf2 common.kafka.consumer 
+\f2\i \cf5 import 
+\f3\i0 \cf2 ( \
+    CustomerProxyEventHandler,\
+    UserProxyEventHandler,\
+    FleetProxyEventHandler,\
+)\
+
+\f2\i \cf5 from 
+\f3\i0 \cf2 common.utils 
+\f2\i \cf5 import 
+\f3\i0 \cf2 required\
+
+\f2\i \cf5 from 
+\f3\i0 \cf2 be_fms_driver_management.settings 
+\f2\i \cf5 import 
+\f3\i0 \cf2 (\
+    KAFKA_EVENTS_TOPIC,\
+    KAFKA_EVENTS_BROKER,\
+    KAFKA_AUTOCOMMIT_OFFSET,\
+    KAFKA_EVENTS_TOPIC_CONSUMER_GROUP,\
+    KAFKA_CONSUME_EVENTS,\
+    DEBUG,\
+)\
+
+\f2\i \cf5 from 
+\f3\i0 \cf2 common.utils 
+\f2\i \cf5 import 
+\f3\i0 \cf2 DeviceEventHandler\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\i \cf4 # Do not consume events if kafka consumer disabled in settings\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf5 if not 
+\f3\i0 \cf2 KAFKA_CONSUME_EVENTS:\
+    
+\f2\i \cf5 return\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf4 # Get logger\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3\i0 \cf2 logger = logging.\cf6 getLogger\cf2 (__name__)\
+\
+
+\f2\i \cf5 def 
+\f3\i0 \cf6 consume_events\cf2 ():\
+    \cf8 print\cf2 (\cf7 "FMS Driver Management Event Consumer Thread Started..."\cf2 )\
+    \cf7 """Event consumer to consume events generated by other\
+    microservices on the KAFKA_EVENTS_TOPIC\
+\
+    """\
+    
+\f2\i \cf4 # To consume latest messages and auto-commit offsets\
+\
+    
+\f3\i0 \cf2 consumer = \cf6 KafkaConsumer\cf2 (\
+        KAFKA_EVENTS_TOPIC,\
+        \cf12 bootstrap_servers\cf2 =[KAFKA_EVENTS_BROKER],\
+        \cf12 group_id\cf2 =KAFKA_EVENTS_TOPIC_CONSUMER_GROUP,\
+        \cf12 enable_auto_commit\cf2 =KAFKA_AUTOCOMMIT_OFFSET,\
+    )\
+\
+    
+\f2\i \cf5 for 
+\f3\i0 \cf2 message 
+\f2\i \cf5 in 
+\f3\i0 \cf2 consumer:\
+        
+\f2\i \cf4 # print("Received message: ", message)\
+        
+\f3\i0 \cf2 is_required, event = \cf6 required\cf2 (message)\
+        
+\f2\i \cf5 if not 
+\f3\i0 \cf2 is_required:\
+            
+\f2\i \cf5 continue\
+\
+        
+\f3\i0 \cf8 print\cf2 (\
+            \cf7 "%s:%d:%d: key=%s value=%s"\
+            \cf2 % (\
+                message.topic,\
+                message.partition,\
+                message.offset,\
+                message.key,\
+                message.value,\
+            )\
+        )\
+        
+\f2\i \cf5 try
+\f3\i0 \cf2 :\
+            
+\f2\i \cf4 # If event type is model (A model was created/updated or del)\
+            \cf5 if 
+\f3\i0 \cf2 json.\cf6 loads\cf2 (message.value).\cf6 get\cf2 (\cf7 "event_type"\cf2 , 
+\f2\i \cf5 None
+\f3\i0 \cf2 ) == \cf7 "model"\cf2 :\
+                json.\cf6 loads\cf2 (message.value).\cf6 get\cf2 (\cf7 "instance"\cf2 , 
+\f2\i \cf5 None
+\f3\i0 \cf2 )\
+\
+            event_name = event.\cf6 get\cf2 (\cf7 "event_name"\cf2 , 
+\f2\i \cf5 None
+\f3\i0 \cf2 )\
+            source = event.\cf6 get\cf2 (\cf7 "source"\cf2 , 
+\f2\i \cf5 None
+\f3\i0 \cf2 )\
+\
+            
+\f2\i \cf5 if not 
+\f3\i0 \cf2 event_name:\
+                
+\f2\i \cf5 raise 
+\f3\i0 \cf8 ValueError\cf2 (\
+                    \cf7 "Cannot process event, 'name' not \cf8 \\\
+\cf7                 found in event value"\
+                \cf2 )\
+\
+            
+\f2\i \cf5 if not 
+\f3\i0 \cf2 source:\
+                
+\f2\i \cf5 raise 
+\f3\i0 \cf8 ValueError\cf2 (\
+                    \cf7 "Cannot process source, 'source' not \cf8 \\\
+\cf7                 found in event value"\
+                \cf2 )\
+\
+            
+\f2\i \cf4 # To handle any event, Add check for event name here and\
+            # call the handler defined in handlers module.\
+\
+            # Handles for CustomerProxy\
+\
+            
+\f3\i0 \cf2 customer_handler = \cf6 CustomerProxyEventHandler\cf2 ()\
+\
+            
+\f2\i \cf5 if 
+\f3\i0 \cf2 event_name == \cf7 "create_CustomerProxy"\cf2 :\
+                customer_handler.\cf6 create_customer_proxy\cf2 (event)\
+\
+            
+\f2\i \cf5 if 
+\f3\i0 \cf2 event_name == \cf7 "update_CustomerProxy"\cf2 :\
+                customer_handler.\cf6 update_customer_proxy\cf2 (event)\
+\
+            
+\f2\i \cf5 if 
+\f3\i0 \cf2 event_name == \cf7 "delete_CustomerProxy"\cf2 :\
+                customer_handler.\cf6 delete_customer_proxy\cf2 (event)\
+			\
+\
+			
+\f2\i \cf5 except 
+\f3\i0 \cf8 Exception 
+\f2\i \cf5 as 
+\f3\i0 \cf2 ex:\
+            		logger.\cf6 exception\cf2 (ex, \cf12 stack_info\cf2 =DEBUG)\
+\
+	event_consumer_thread = \cf6 Thread\cf2 (\cf12 target\cf2 =consume_events, \cf12 args\cf2 =())\
+\
+	event_consumer_thread.\cf6 start\cf2 ()\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs22 \cf15 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \
+\
+	\
+\
+}
